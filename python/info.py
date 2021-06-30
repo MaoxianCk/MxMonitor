@@ -89,7 +89,15 @@ class Info:
             gpu_memoryUtil = gpu.memoryUtil
             # GPU序号，GPU总量，GPU使用量，gpu使用占比
             res['gpu'].append(
-                [gpu.id, gpu_memoryTotal, gpu.memoryUsed, gpu_memoryUtil])
+                {
+                    'id': gpu.id,
+                    'memoryTotal': gpu_memoryTotal,
+                    'memoryUsed': gpu.memoryUsed,
+                    'memoryUtil': gpu_memoryUtil,
+                    'memoryTotalStr': formatUnitStr(gpu_memoryTotal),
+                    'memoryUsedStr': formatUnitStr(gpu.memoryUsed),
+                    'memoryUtilStr': formatUnitStr(gpu_memoryUtil)
+                })
 
         return res
 
