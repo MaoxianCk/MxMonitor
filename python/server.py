@@ -4,6 +4,10 @@ from info import Info
 server = flask.Flask(__name__)
 sysInfo = Info()
 
+@server.route('/')
+def root():
+    return flask.redirect(flask.url_for('info'), code=302)
+
 @server.route('/info')
 def info():
     return json.dumps(sysInfo.sysInfo, ensure_ascii=False)

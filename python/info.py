@@ -16,15 +16,15 @@ class Info:
         return '{:g}%'.format(round(val, 2))
 
 
-    def formatUnitStr(self, val):
+    def formatUnitStr(self, val, unit = 'B'):
         units = ['B', 'KB', 'M', 'G', 'T', 'PB']
-        unit = 'B'
-        for i in range(len(units)):
+        i = units.index(unit)
+        for i in range(i, len(units)):
             unit = units[i]
             if val < 1024:
                 break
             val /= 1024
-        return '{}{}'.format(round(val, 1), unit)
+        return '{:g}{}'.format(round(val, 1), unit)
 
 
     def getInfo(self):
@@ -94,9 +94,9 @@ class Info:
                     'memoryTotal': gpu_memoryTotal,
                     'memoryUsed': gpu.memoryUsed,
                     'memoryUtil': gpu_memoryUtil,
-                    'memoryTotalStr': formatUnitStr(gpu_memoryTotal),
-                    'memoryUsedStr': formatUnitStr(gpu.memoryUsed),
-                    'memoryUtilStr': formatUnitStr(gpu_memoryUtil)
+                    'memoryTotalStr': self.formatUnitStr(gpu_memoryTotal, 'M'),
+                    'memoryUsedStr': self.formatUnitStr(gpu.memoryUsed, 'M'),
+                    'memoryUtilStr': self.formatPercentStr(gpu_memoryUtil)
                 })
 
         return res
@@ -118,3 +118,6 @@ class Info:
     def stopUpdateSysInfo(self):
         Info.timer = False
         Info.isRun = False
+
+if __name__ == '__main__':
+    Info().getInfo()
