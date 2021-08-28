@@ -17,4 +17,4 @@ if __name__ == '__main__':
     # port可以指定端口，默认端口是5000
     # host默认是服务器，默认是127.0.0.1
     # debug=True 修改时不关闭服务
-    server.run(port=7777, debug=True)
+    server.run(host='0.0.0.0', port=7777, debug=True)
